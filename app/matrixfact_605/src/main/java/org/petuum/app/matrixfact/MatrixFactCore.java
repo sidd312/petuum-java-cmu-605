@@ -71,10 +71,11 @@ public class MatrixFactCore {
 
     // calculation of square loss
     for (int index = elemBegin; index < elemEnd; index++) {
-      DoubleRow ltemp = LTable.get(index);
-      DoubleRow rtemp = RTable.get(index);
+      Rating temprating = ratings.get(index);
+      DoubleRow ltemp = LTable.get(temprating.userId);
+      DoubleRow rtemp = RTable.get(temprating.prodId);
       sqLoss += Math.pow(
-          ratings.get(index).rating - dotProduct(ltemp, rtemp, K), 2);
+          temprating.rating - dotProduct(ltemp, rtemp, K), 2);
     }
     totalLoss += sqLoss;
 
